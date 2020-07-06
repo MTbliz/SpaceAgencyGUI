@@ -1,0 +1,15 @@
+.nav-item{
+    font-size: x-large;
+    color: aliceblue;
+}
+
+.nav-item:hover{
+    background-color: dimgrey ;
+}
+
+.content{
+    align-self: start;
+    width: 90%;
+    height: 100%;
+}
+

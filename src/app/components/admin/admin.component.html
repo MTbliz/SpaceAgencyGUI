@@ -1,0 +1,36 @@
+<div class="admin-layout">
+    <mat-grid-list class="myGridList" cols="32" rowHeight="100px">
+
+        <!--Left panel -->
+        <mat-grid-tile class="left-panel" colspan=4 rowspan=16>
+            <mat-list style="align-self: flex-start;">
+                <mat-list-item>
+                    <button mat-button class="nav-item"
+                        routerLink="create-missions">Misions</button>
+                </mat-list-item>
+                <mat-list-item>
+                    <button mat-button class="nav-item"
+                        routerLink="create-products">Products</button>
+                </mat-list-item>
+                <mat-list-item>
+                    <button mat-button class="nav-item"
+                        routerLink="search-orders">Orders</button>
+                </mat-list-item>
+            </mat-list>
+        </mat-grid-tile>
+
+        <!--Center panel -->
+        <mat-grid-tile style="border: black solid 1px;" class="center-panel-content" colspan=24 rowspan=16>
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-grid-tile>
+
+        <!--Right panel -->
+        <mat-grid-tile style="border: black solid 1px" class="right-panel" colspan=4 rowspan=16>3</mat-grid-tile>
+
+        <!--Bottom panel -->
+        <mat-grid-tile style="border: black solid 1px" class="bottom-panel" colspan=32 rowspan=1>4</mat-grid-tile>
+
+    </mat-grid-list>
+</div>
