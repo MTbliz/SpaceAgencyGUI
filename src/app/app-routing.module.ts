@@ -8,16 +8,21 @@ import { AdminProductsComponent } from './components/admin/admin-products/admin-
 import { AdminMissionsComponent } from './components/admin/admin-missions/admin-missions.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
 import { AllProductsComponent } from './components/products/all-products/all-products.component';
+import { LoginComponent } from './security/login/login.component';
+import { RegisterComponent } from './security/register/register.component';
+import { AuthGuardService } from './security/_services/auth-guard-service.service';
 
 
 const routes: Routes = [
-{path: 'home', component: HomeComponent},
-{path: 'missions', component: MissionsComponent},
-{path: 'products', component: ProductsComponent,
+{path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
+{path: 'missions', component: MissionsComponent, canActivate: [AuthGuardService]},
+{path: 'products', component: ProductsComponent, canActivate: [AuthGuardService],
 children:[
   {path: 'all', component: AllProductsComponent},
 ]},
-{path: 'admin', component: AdminComponent,
+{ path: 'login', component: LoginComponent },
+{ path: 'register', component: RegisterComponent },
+{path: 'admin', component: AdminComponent, canActivate: [AuthGuardService],
 children:[
   {path: 'create-missions', component: AdminMissionsComponent},
   {path: 'create-products', component: AdminProductsComponent},

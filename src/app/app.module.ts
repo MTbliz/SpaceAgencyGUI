@@ -14,6 +14,9 @@ import { AdminMissionsComponent } from './components/admin/admin-missions/admin-
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
 import { AllProductsComponent } from './components/products/all-products/all-products.component';
+import { LoginComponent } from './security/login/login.component';
+import { RegisterComponent } from './security/register/register.component';
+import { AuthGuardService } from './security/_services/auth-guard-service.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { AllProductsComponent } from './components/products/all-products/all-pro
     AdminProductsComponent,
     AdminOrdersComponent,
     AllProductsComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,7 @@ import { AllProductsComponent } from './components/products/all-products/all-pro
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

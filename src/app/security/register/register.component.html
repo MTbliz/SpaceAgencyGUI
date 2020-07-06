@@ -1,0 +1,115 @@
+<div class="register-layout">
+    <mat-grid-list class="myGridList" cols="32" rowHeight="100px">
+
+        <!--Left panel -->
+        <mat-grid-tile class="left-panel" colspan=4 rowspan=16></mat-grid-tile>
+
+        <!--Center panel -->
+        <mat-grid-tile style="border: black solid 1px;" class="center-panel-content" colspan=24 rowspan=16>
+            <div class="content">
+
+                <!--Start Register form-->
+                <div class="register-form">
+                    <div class="form-control">
+                        <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="image-test" />
+                        <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+                            novalidate>
+
+                            <tr>
+                                <td><label for="firstName">First Name</label></td>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" name="firstName" [(ngModel)]="form.firstName" required #firstName="ngModel" />
+                                  <div class="alert-danger" *ngIf="f.submitted && firstName.invalid">
+                                    <div *ngIf="firstName.errors.required">First Name is required</div>
+                                  </div>
+                                </div>
+                              </tr>
+                              <tr>
+                                <td><label for="lastName">Last Name</label></td>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" name="lastName" [(ngModel)]="form.lastName" required
+                                    #lastName="ngModel" />
+                                  <div class="alert-danger" *ngIf="f.submitted && lastName.invalid">
+                                    <div *ngIf="lastName.errors.required">Last Name is required</div>
+                                  </div>
+                                </div>
+                              </tr>
+
+                            <!--UserName-->
+                            <tr>
+                                <td><label for="username">Username</label></td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="username" [(ngModel)]="form.username"
+                                        required minlength="3" maxlength="20" #username="ngModel" />
+                                    <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+                                        <div *ngIf="username.errors.required">Username is required</div>
+                                        <div *ngIf="username.errors.minlength">
+                                            Username must be at least 3 characters
+                                        </div>
+                                        <div *ngIf="username.errors.maxlength">
+                                            Username must be at most 20 characters
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+
+                            <!--Email-->
+                            <tr>
+                                <td><label for="email">Email</label></td>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" [(ngModel)]="form.email"
+                                        required email #email="ngModel" />
+                                    <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+                                        <div *ngIf="email.errors.required">Email is required</div>
+                                        <div *ngIf="email.errors.email">
+                                            Email must be a valid email address
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+
+                            <!--Pasword-->
+                            <tr>
+                                <td><label for="password">Password</label></td>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password"
+                                        [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
+                                    <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                                        <div *ngIf="password.errors.required">Password is required</div>
+                                        <div *ngIf="password.errors.minlength">
+                                            Password must be at least 6 characters
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+
+                            <!--Sign up-->
+                            <div class="form-group">
+                                <button mat-raised-button color="primary" class="btn btn-primary btn-block">Sign
+                                    Up</button>
+                            </div>
+
+                            <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                                Signup failed!<br />{{ errorMessage }}
+                            </div>
+                        </form>
+
+                        <div class="alert alert-success" *ngIf="isSuccessful">
+                            Your registration is successful!
+                        </div>
+                    </div>
+                </div>
+
+                <!--End Register form-->
+
+            </div>
+        </mat-grid-tile>
+
+        <!--Right panel -->
+        <mat-grid-tile style="border: black solid 1px" class="right-panel" colspan=4 rowspan=16>3</mat-grid-tile>
+
+        <!--Bottom panel -->
+        <mat-grid-tile style="border: black solid 1px" class="bottom-panel" colspan=32 rowspan=1>4</mat-grid-tile>
+
+    </mat-grid-list>
+</div>

@@ -1,0 +1,54 @@
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../_services/auth.service';
+import { TokenStorageService } from '../_services/token-storage.service';
+import { UserService } from '../_services/user.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
+  userid: number;
+  username: string;
+  useremail
+
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private userService: UserService) { }
+
+  ngOnInit() {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.authService.setLoggedIn(true)
+      this.roles = this.tokenStorage.getUser().roles;
+    }
+  }
+
+  onSubmit() {
+    this.authService.login(this.form).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.authService.setLoggedIn(true)
+        this.roles = this.tokenStorage.getUser().roles;
+        this.username = this.tokenStorage.getUser().name
+        this.reloadPage();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+        this.authService.setLoggedIn(false)
+      }
+    );
+  }
+
+  reloadPage() {
+    window.location.reload();
+  }
+}

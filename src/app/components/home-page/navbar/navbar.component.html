@@ -1,10 +1,28 @@
 <mat-toolbar color="primary" class="navbar">
     <div class="navbar-nav mr-auto" routerLinkActive="active">
         <a>Logo</a>
-        <button mat-button class="nav-item" routerLink="missions">Missions</button>
-        <button mat-button class="nav-item" routerLink="products/all">Products</button>
+        <button mat-button class="nav-item" *ngIf="isLoggedIn" routerLink="missions">Missions</button>
+        <button mat-button class="nav-item" *ngIf="isLoggedIn" routerLink="products/all">Products</button>
     </div>
-    <div class="navbar-nav ml-auto">
-        <button mat-button class="nav-item" routerLink="admin">Admin</button>
-    </div>
+    
+    <div class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+        <button mat-button class="nav-item" routerLink="register">
+          Sign Up
+        </button>
+        <button mat-button class="nav-item" routerLink="login">
+          Login
+        </button>
+      </div>
+    
+      <div class="navbar-nav ml-auto" *ngIf="isLoggedIn" class="nav-link">
+        
+        <button mat-button class="nav-item" *ngIf="showAdminBoard" routerLink="admin">Admin</button>
+        <button mat-button class="nav-item">
+          {{ username }}
+        </button>
+        <button mat-button class="nav-item" href class="nav-link" (click)="logout()">
+          LogOut
+        </button>
+      </div>
+
 </mat-toolbar>
