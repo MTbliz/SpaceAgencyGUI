@@ -1,29 +1,29 @@
 .col-md-12 {
     margin-top: 80px;
-      margin-left: 300px;
-      width: 50%;
+    margin-left: 300px;
+    width: 50%;
     border: 10px solid #f1f1f1;
     background-color: #F8F8FF;
     padding: 10px;
-    }
+}
     
-    .form-control {
-        width: 70%;
-        padding: 20px 30px;
-        margin: 10px 60px;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
+.form-control {
+    width: 70%;
+    padding: 20px 30px;
+    margin: 10px 60px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
     
-    .alert-danger{
+.alert-danger{
     color: red;
-    }
+}
     
-    .content{
-        align-self: start;
-        width: 90%;
-        height: 100%;
-    }
+.content{
+    align-self: start;
+    width: 90%;
+    height: 100%;
+}
     
     

@@ -41,11 +41,16 @@ export class AuthService {
 
   register(user): Observable<any> {
     return this.http.post(AUTH_API + 'signup', {
+      username: user.username,
+      appUser:{
       firstName: user.firstName,
       lastName: user.lastName,
-      username: user.username,
       email: user.email,
-      password: user.password
+      address: user.address},
+      email: user.email,
+      password: user.password,
+      //All users created in system will be created with User access
+      //role: ['user'],
     }, httpOptions);
   }
 }

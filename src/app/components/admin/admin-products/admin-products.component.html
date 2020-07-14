@@ -85,8 +85,8 @@
                 <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
                 <button mat-raised-button color="primary" type="button" (click)="clearForm()"
                     style="margin-left: 10px;">Clear</button>
-                <button mat-raised-button color="primary" type="submit" [disabled]="!productForm.valid || fileToUpload == null"
-                    style="margin-left: 10px;">Create</button>
+                <button mat-raised-button color="primary" type="submit"
+                    [disabled]="!productForm.valid || fileToUpload == null" style="margin-left: 10px;">Create</button>
             </div>
         </form>
     </div>
@@ -103,9 +103,6 @@
         </mat-form-field>
     </div>
     <table mat-table id="table" [dataSource]="dataSource" class="col-10" #sort="matSort" matSort>
-
-        <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Position Column -->
         <ng-container matColumnDef="id">
@@ -127,10 +124,11 @@
 
         <!-- Coordinates Column -->
         <ng-container matColumnDef="coordinates">
-            <th class="tab-col-20" mat-header-cell *matHeaderCellDef mat-sort-header> Coordinates (Latitude, Longitude) </th>
+            <th class="tab-col-20" mat-header-cell *matHeaderCellDef mat-sort-header> Coordinates (Latitude, Longitude)
+            </th>
             <td mat-cell *matCellDef="let element">
                 <div *ngFor="let coordinate of element.footprint.coordinates">
-                       Coordinate: {{coordinate.latitude}}, {{coordinate.longitude}}
+                    Coordinate: {{coordinate.latitude}}, {{coordinate.longitude}}
                 </div>
             </td>
         </ng-container>
@@ -138,13 +136,13 @@
         <ng-container matColumnDef="image">
             <th class="tab-col-20" mat-header-cell *matHeaderCellDef> Product Image </th>
             <td mat-cell *matCellDef="let element">
-              <div class="portrait">
-                <img [src]="transform(element.fileDb.data)" />
-              </div>
+                <div class="portrait">
+                    <img [src]="transform(element.fileDb.data)" />
+                </div>
             </td>
-          </ng-container>
+        </ng-container>
 
-          <!-- Product Price Column -->
+        <!-- Product Price Column -->
         <ng-container matColumnDef="productPrice">
             <th class="tab-col-15" mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
             <td mat-cell *matCellDef="let element">{{element.price}} $</td>
@@ -153,7 +151,12 @@
         <ng-container matColumnDef="actions">
             <th class="tab-col-" mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let row; let i = index">
-                <button mat-icon-button  (click)="downloadFile(row)"  ><mat-icon>cloud_download</mat-icon></button>
+                <button mat-icon-button (click)="downloadFile(row)">
+                    <mat-icon>cloud_download</mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteRecord(row,i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
             </td>
         </ng-container>
 

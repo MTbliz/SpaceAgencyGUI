@@ -7,6 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MissionDialogUpdateComponent } from './mission-dialog-update/mission-dialog-update.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface ImageryType {
   value: string;
@@ -26,7 +28,7 @@ export class AdminMissionsComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild('paginator') paginator: MatPaginator;
 
-  displayedColumns: string[] = ['name', 'type', 'startDate', 'finishDate','image', 'actions'];
+  displayedColumns: string[] = ['name', 'type', 'startDate', 'finishDate', 'image', 'actions'];
   missions: Mission[] = []
   dataSource = new MatTableDataSource(this.missions);
   fileToUpload: File = null;
@@ -37,16 +39,16 @@ export class AdminMissionsComponent implements OnInit {
     { value: 'TYPE_HYPERSPECTRAL', viewValue: 'Hyperspectral' }
   ];
 
-  constructor(private missionsService: MissionsService, private sanitizer:DomSanitizer) { }
+  constructor(private missionsService: MissionsService, private sanitizer: DomSanitizer, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getMissions();
   }
 
-  transform(bytecode: string){
-    var newUrl= 'data:image/png;base64,' + bytecode;
+  transform(bytecode: string) {
+    var newUrl = 'data:image/png;base64,' + bytecode;
     return this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
-}
+  }
 
   applyFilterMissions(filterValue: string) {
     const dataPipe: DatePipe = new DatePipe('en');
@@ -103,6 +105,29 @@ export class AdminMissionsComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
+  }
+
+  deleteRecord(row, index) {
+    this.missionsService.deleteMission(row.id).subscribe();
+    this.dataSource.data.splice(index, 1);
+    this.dataSource = new MatTableDataSource(this.dataSource.data);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  startEdit(row, index) {
+    let dialogRef = this.dialog.open(MissionDialogUpdateComponent
+      , { data: { id: row.id, name: row.name, type: row.type, startDate: row.startDate, finishDate: row.finishDate, fileDb: row.fileDb } });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == null) {
+        return;
+      } else {
+        this.dataSource.data[index] = result;
+        this.dataSource = new MatTableDataSource(this.dataSource.data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
+    });
   }
 
 }

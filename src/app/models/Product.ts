@@ -1,7 +1,7 @@
 import { Mission } from './Mission';
 import { Footprint } from './Footprint';
 
-export class Product{
+export class Product {
     constructor(
         public id: number,
         public mission: Mission,
@@ -9,5 +9,5 @@ export class Product{
         public footprint: Footprint,
         public price: number,
         public url: string
-    ){}
+    ) { }
 }

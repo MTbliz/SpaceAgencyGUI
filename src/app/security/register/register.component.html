@@ -18,22 +18,23 @@
                             <tr>
                                 <td><label for="firstName">First Name</label></td>
                                 <div class="form-group">
-                                  <input type="text" class="form-control" name="firstName" [(ngModel)]="form.firstName" required #firstName="ngModel" />
-                                  <div class="alert-danger" *ngIf="f.submitted && firstName.invalid">
-                                    <div *ngIf="firstName.errors.required">First Name is required</div>
-                                  </div>
+                                    <input type="text" class="form-control" name="firstName"
+                                        [(ngModel)]="form.firstName" required #firstName="ngModel" />
+                                    <div class="alert-danger" *ngIf="f.submitted && firstName.invalid">
+                                        <div *ngIf="firstName.errors.required">First Name is required</div>
+                                    </div>
                                 </div>
-                              </tr>
-                              <tr>
+                            </tr>
+                            <tr>
                                 <td><label for="lastName">Last Name</label></td>
                                 <div class="form-group">
-                                  <input type="text" class="form-control" name="lastName" [(ngModel)]="form.lastName" required
-                                    #lastName="ngModel" />
-                                  <div class="alert-danger" *ngIf="f.submitted && lastName.invalid">
-                                    <div *ngIf="lastName.errors.required">Last Name is required</div>
-                                  </div>
+                                    <input type="text" class="form-control" name="lastName" [(ngModel)]="form.lastName"
+                                        required #lastName="ngModel" />
+                                    <div class="alert-danger" *ngIf="f.submitted && lastName.invalid">
+                                        <div *ngIf="lastName.errors.required">Last Name is required</div>
+                                    </div>
                                 </div>
-                              </tr>
+                            </tr>
 
                             <!--UserName-->
                             <tr>
@@ -48,6 +49,21 @@
                                         </div>
                                         <div *ngIf="username.errors.maxlength">
                                             Username must be at most 20 characters
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+
+                            <!--Pasword-->
+                            <tr>
+                                <td><label for="password">Password</label></td>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password"
+                                        [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
+                                    <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                                        <div *ngIf="password.errors.required">Password is required</div>
+                                        <div *ngIf="password.errors.minlength">
+                                            Password must be at least 6 characters
                                         </div>
                                     </div>
                                 </div>
@@ -68,17 +84,14 @@
                                 </div>
                             </tr>
 
-                            <!--Pasword-->
+                            <!--Address-->
                             <tr>
-                                <td><label for="password">Password</label></td>
+                                <td><label for="address">Address</label></td>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="password"
-                                        [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
-                                    <div class="alert-danger" *ngIf="f.submitted && password.invalid">
-                                        <div *ngIf="password.errors.required">Password is required</div>
-                                        <div *ngIf="password.errors.minlength">
-                                            Password must be at least 6 characters
-                                        </div>
+                                    <input type="address" class="form-control" name="address" [(ngModel)]="form.address"
+                                        required #address="ngModel" />
+                                    <div class="alert-danger" *ngIf="f.submitted && address.invalid">
+                                        <div *ngIf="address.errors.required">Address is required</div>
                                     </div>
                                 </div>
                             </tr>

@@ -1,0 +1,88 @@
+<!--Product Table start-->
+
+<div class="product-table-container">
+  <div id="product-filter">
+    <span>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilterProducts($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+      <button id="remove-button" mat-button class="nav-item" color="primary" (click)="removeProductFromCart()">
+        Remove Selected
+      </button>
+      <button id="remove-button" mat-button class="nav-item" color="primary" (click)="orderProducts()">
+        Order Products
+      </button>
+    </span>
+  </div>
+  <table mat-table id="table" [dataSource]="dataSource" class="col-10" #sort="matSort" matSort>
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th class="tab-col-5" mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row; let i = index">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(i, row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th class="tab-col-10" mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+      <td mat-cell *matCellDef="let element" class="element-id"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Product Name Column -->
+    <ng-container matColumnDef="missionName">
+      <th class="tab-col-25" mat-header-cell *matHeaderCellDef mat-sort-header> Mission </th>
+      <td mat-cell *matCellDef="let element">{{element.mission.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="image">
+      <th class="tab-col-20" mat-header-cell *matHeaderCellDef> Mission Image </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="portrait">
+          <img [src]="transform(element.mission.fileDb.data)" />
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Acquisition Date Column -->
+    <ng-container matColumnDef="acquisitionDate">
+      <th class="tab-col-15" mat-header-cell *matHeaderCellDef mat-sort-header> Acquisition Date</th>
+      <td mat-cell *matCellDef="let element">{{element.acquisitionDate | date: 'dd MMM yyyy'}}</td>
+    </ng-container>
+
+    <!-- Coordinates Column -->
+    <ng-container matColumnDef="coordinates">
+      <th class="tab-col-20" mat-header-cell *matHeaderCellDef mat-sort-header> Coordinates (Latitude, Longitude) </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngFor="let coordinate of element.footprint.coordinates">
+          Coordinate: {{coordinate.latitude}}, {{coordinate.longitude}}
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Product Price Column -->
+    <ng-container matColumnDef="productPrice">
+      <th class="tab-col-15" mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+      <td mat-cell *matCellDef="let element">{{element.price}} $</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th class="tab-col-10" mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row; let i = index">
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
+
+<!--Product Table end-->

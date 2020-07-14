@@ -2,7 +2,165 @@
     <mat-grid-list class="myGridList" cols="32" rowHeight="100px">
 
         <!--Left panel -->
-        <mat-grid-tile class="left-panel" colspan=4 rowspan=16></mat-grid-tile>
+        <mat-grid-tile class="left-panel" colspan=4 rowspan=16>
+
+
+            <!--Searching panel start-->
+            <mat-accordion>
+                <form #searchForm="ngForm">
+                    <!--Search by Mission Name-->
+                    <mat-expansion-panel (closed)="clearForm()">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Mission Name
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <span>
+                            <mat-form-field>
+                                <mat-label> Name</mat-label>
+                                <input matInput type="text" name="missionName" ngModel>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" (click)="sendMissionNameToService()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </span>
+                    </mat-expansion-panel>
+
+
+                    <!--Search by Type-->
+                    <mat-expansion-panel (closed)="clearForm()">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Type
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <span>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Type</mat-label>
+                                <mat-select ngModel name="type">
+                                    <mat-option *ngFor="let type of types" [value]="type.value">
+                                        {{type.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" (click)="sendMissionTypeToService()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </span>
+                    </mat-expansion-panel>
+
+
+                    <!--Search by Product Between Dates-->
+                    <mat-expansion-panel (closed)="clearForm()">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Acquisition Date Between Dates
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <span>
+                            <mat-form-field class="element-greaterThenDate" appearance="fill">
+                                <input matInput placeholder="Start Date" required [matDatepicker]="picker1" ngModel
+                                    name="startDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field class="element-greaterThenDate" appearance="fill">
+                                <input matInput placeholder="End Date" required [matDatepicker]="picker2" ngModel
+                                    name="endDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" (click)="sendStartEndDateToService()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </span>
+                    </mat-expansion-panel>
+
+
+                    <!--Search by Acquisition Date Greater Then-->
+                    <mat-expansion-panel (closed)="clearForm()">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Acquisition Date Greater Then
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <span>
+                            <mat-form-field class="element-greaterThenDate" appearance="fill">
+                                <input matInput placeholder="Date" required [matDatepicker]="picker3" ngModel
+                                    name="greaterThenDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker3></mat-datepicker>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" (click)="sendGreaterThenDateToService()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </span>
+                    </mat-expansion-panel>
+
+
+                    <!--Search by Acquisition Date less Then-->
+                    <mat-expansion-panel (closed)="clearForm()">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Acquisition Date less Then
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <span>
+                            <mat-form-field class="element-lessThenDate" appearance="fill">
+                                <input matInput placeholder="Date" required [matDatepicker]="picker4" ngModel
+                                    name="lessThenDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker4></mat-datepicker>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" (click)="sendLessThenDateToService()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </span>
+                    </mat-expansion-panel>
+
+
+                    <!--Search by Coordinate-->
+                    <mat-expansion-panel (closed)="clearForm()">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Coordinate
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="coordinate1-container">
+                            <mat-form-field class="element-coordinate" appearance="fill">
+                                <mat-label> Latitude </mat-label>
+                                <input matInput type="number" step="0.01" min="0" required name="latitude" ngModel>
+                            </mat-form-field>
+                            <mat-form-field class="element-coordinate" appearance="fill">
+                                <mat-label> Longitude</mat-label>
+                                <input matInput type="number" step="0.01" min="0" required name="longitude" ngModel>
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" (click)="sendCoordinateToService()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </div>
+                    </mat-expansion-panel>
+
+                    <!--Search by Most Ordered -->
+                    <mat-expansion-panel (closed)="clearForm()">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Most Ordered
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <span>
+                            <h4 style="margin-top: 5%;">Search by most ordered</h4>
+                            <button mat-raised-button color="primary" (click)="sendMostOrderedMessageToService()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </span>
+                    </mat-expansion-panel>
+
+                </form>
+            </mat-accordion>
+            <!--Searching panel end-->
+
+        </mat-grid-tile>
 
         <!--Center panel -->
         <mat-grid-tile style="border: black solid 1px;" class="center-panel-content" colspan=24 rowspan=16>

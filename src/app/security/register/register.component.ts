@@ -4,7 +4,7 @@ import { AuthService } from '../_services/auth.service';
 export interface Role {
   value: string;
   viewValue: string;
-  }
+}
 
 @Component({
   selector: 'app-register',
@@ -18,9 +18,9 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
 
   roles: Role[] = [
-    {value: 'Administrator', viewValue: 'admin'},
-    {value: 'Moderator', viewValue: 'mod'},
-    {value: 'User', viewValue: 'user'},
+    { value: 'Administrator', viewValue: 'admin' },
+    { value: 'Moderator', viewValue: 'mod' },
+    { value: 'User', viewValue: 'user' },
   ];
 
   constructor(private authService: AuthService) { }

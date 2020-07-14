@@ -39,7 +39,6 @@ export class AdminProductsComponent implements OnInit {
     this.getProducts();
   }
 
-  
   private getMissions() {
     this.missionsService.getMissions()
       .subscribe(response => {
@@ -52,6 +51,15 @@ export class AdminProductsComponent implements OnInit {
       .subscribe(response => {
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
+
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch (property) {
+            case 'productPrice': return item.price;
+            case 'missionName': return item.mission.name;
+            default: return item[property];
+          }
+        };
+
         this.dataSource.paginator = this.paginator;
       });
   }
@@ -73,7 +81,6 @@ export class AdminProductsComponent implements OnInit {
     )
 
     const productDTO: ProductDTO = new ProductDTO(
-
       mission,
       this.productForm.value.acquisitionDate,
       foorPrintDTO,
@@ -85,6 +92,15 @@ export class AdminProductsComponent implements OnInit {
         console.log(response);
         this.dataSource.data.push(response);
         this.dataSource = new MatTableDataSource(this.dataSource.data);
+
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch (property) {
+            case 'productPrice': return item.price;
+            case 'missionName': return item.mission.name;
+            default: return item[property];
+          }
+        };
+
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       })
@@ -102,9 +118,10 @@ export class AdminProductsComponent implements OnInit {
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       const formattedacquisitionDate = dataPipe.transform(data.acquisitionDate, 'MM/dd/yyyy');
 
-
       return data.footprint.coordinates.map(coordinate => coordinate.latitude).join("").toLowerCase().includes(filter) ||
         data.footprint.coordinates.map(coordinate => coordinate.longitude).join("").toLowerCase().includes(filter) ||
+        (data.price + '').toLowerCase().includes(filter) ||
+        data.mission.name.toLowerCase().includes(filter) ||
         defaultPredicate(data, filter) ||
         formattedacquisitionDate.indexOf(filter) >= 0
         ;
@@ -137,6 +154,14 @@ export class AdminProductsComponent implements OnInit {
       link.download = fileName;
       link.click();
     });
+  }
+
+  deleteRecord(row, index) {
+    this.productsService.deleteProduct(row.id).subscribe();
+    this.dataSource.data.splice(index, 1);
+    this.dataSource = new MatTableDataSource(this.dataSource.data);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
 }

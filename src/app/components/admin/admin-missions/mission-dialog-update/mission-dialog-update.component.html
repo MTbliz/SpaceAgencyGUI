@@ -1,0 +1,42 @@
+<div mat-dialog-content class="mission-form-container">
+  <div class="mission-form-content">
+    <div class="form-title">
+      <h1>Mission Information</h1>
+    </div>
+    <form (ngSubmit)="updateMission()" #missionForm="ngForm">
+      <mat-divider></mat-divider>
+      <mat-form-field class="col-4">
+        <mat-label> Mission Name</mat-label>
+        <input matInput required name="name" [(ngModel)]="data.name">
+      </mat-form-field>
+
+      <mat-form-field class="col-4">
+        <mat-label> Type</mat-label>
+        <mat-select name="type" [(ngModel)]="data.type">
+          <mat-option *ngFor="let type2 of types" [value]="type2.value">
+            {{type2.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Start Date" required [matDatepicker]="picker1" [(ngModel)]="data.startDate"
+          name="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <input matInput placeholder="Finish Date" [matDatepicker]="picker2" [(ngModel)]="data.finishDate"
+          name="finishDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+    </form>
+    <div>
+      <button mat-raised-button color="primary" type="submit" (click)="updateMission()" [disabled]="!missionForm.valid"
+        style="margin-left: 10px;">Update Mission</button>
+      <button mat-raised-button color="primary" (click)="closeDialog()" style="margin-left: 10px;">Cancel</button>
+    </div>
+  </div>
+</div>

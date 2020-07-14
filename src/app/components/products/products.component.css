@@ -13,3 +13,61 @@
     height: 100%;
 }
 
+mat-accordion{
+    align-self: start;
+    margin-top: 5%;
+    width: 100%;
+    height: 100%;
+}
+
+mat-expansion-panel{
+    background-color: rgba(14, 13, 13, 0.3);   
+    color: antiquewhite; 
+}
+
+mat-panel-title{
+  color: white;
+}
+
+.element-greaterThenDate{
+  width: 180px;
+}
+
+.element-lessThenDate{
+  width: 180px;
+}
+  
+mat-datepicker-toggle{
+  color: white;
+}
+
+::ng-deep .mat-checkbox-frame { 
+  border-color: white; 
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: white !important;
+}
+  
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: white !important;;
+}
+  
+::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color: white !important;
+}
+  
+.not-empty-select.mat-selected {
+  color: white !important;
+}
+  
+::ng-deep .mat-select-value-text {
+  color: white !important;
+}
+  
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+}

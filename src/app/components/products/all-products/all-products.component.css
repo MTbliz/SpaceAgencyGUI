@@ -1,43 +1,53 @@
 .product-table-container{
   margin-top: 50px;
-  }
+}
 
 #table{
   background-color: rgba(14, 13, 13, 0.3);
-  }
+}
 
 input{
   color: white;
 }
 
 td{
-color: white;
-border-color:grey;
-background-color: transparent;
+  color: white;
+  border-color:grey;
+  background-color: transparent;
 }
 
 th{
-color: white;
-border-color:grey;
-background-color: transparent;
+  color: white;
+  border-color:grey;
+  background-color: transparent;
 }
 
 img {
   max-width: 100%;
   max-height: 100%;
-  
 }
 
 .portrait {
-margin-top: 10px;
-margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   height: 100px;
   width: 140px;
-  
 }
 
 #product-filter{
-    background-color: rgba(14, 13, 13, 0.3);
+  background-color: rgba(14, 13, 13, 0.3);
+}
+
+#add-to-cart-button{
+  float: right;
+  margin-top: 1%;
+  margin-right: 2%;
+  color: white;
+  background-color: #3F51B5 ;
+}
+
+#add-to-cart-button:hover{
+  background-color:#283593;
 }
 
 mat-label{
@@ -49,23 +59,22 @@ mat-paginator{
   background-color: rgba(14, 13, 13, 0.3);
 }
 
-
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
   color: white !important;
- }
+}
 
- ::ng-deep.mat-form-field-ripple {
+::ng-deep.mat-form-field-ripple {
   /*change color of underline when focused*/
   background-color: white !important;;
- }
+}
 
- ::ng-deep .mat-form-field-label {
+::ng-deep .mat-form-field-label {
   /*change color of label*/
   color: white !important;
- }
+}
 
- .not-empty-select.mat-selected {
+.not-empty-select.mat-selected {
   color: white !important;
 }
 
@@ -93,7 +102,6 @@ mat-paginator{
   margin: 0px;
   padding: 0.5%;
 }
-
 
 .col-8{
   width: 90%;

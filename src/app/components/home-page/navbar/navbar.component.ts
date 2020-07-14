@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from 'src/app/security/_services/token-storage.service';
 import { AuthService } from 'src/app/security/_services/auth.service';
 import { Router } from '@angular/router';
+import { BasketService } from 'src/app/services/basket.service';
+import { Product } from 'src/app/models/Product';
 
 
 @Component({
@@ -14,11 +16,14 @@ export class NavbarComponent implements OnInit {
     isLoggedIn = false;
     showAdminBoard = false;
     username: string;
+    badgeCount: number = 0;
+    products: Product[] = [];
     
-    constructor(private authService: AuthService,private tokenStorageService: TokenStorageService, private router: Router) { }
+    constructor(private authService: AuthService,private tokenStorageService: TokenStorageService, private basketService: BasketService, private router: Router) { }
   
    ngOnInit() {
       this.isLoggedIn = !!this.tokenStorageService.getToken();
+      
   
       if (this.isLoggedIn) {
         const user = this.tokenStorageService.getUser();
@@ -26,7 +31,10 @@ export class NavbarComponent implements OnInit {
   
         this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
         this.username = user.username;
-     
+        this.products = this.basketService.loadProducts();
+        if(this.products !== null ){
+        this.badgeCount = this.products.length;
+        }
       }
     }
   

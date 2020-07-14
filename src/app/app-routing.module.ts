@@ -11,24 +11,44 @@ import { AllProductsComponent } from './components/products/all-products/all-pro
 import { LoginComponent } from './security/login/login.component';
 import { RegisterComponent } from './security/register/register.component';
 import { AuthGuardService } from './security/_services/auth-guard-service.service';
+import { BasketComponent } from './components/basket/basket.component';
+import { BasketProductsComponent } from './components/basket/basket-products/basket-products.component';
+import { AllMissionComponent } from './components/missions/all-mission/all-mission.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 
 
 const routes: Routes = [
-{path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
-{path: 'missions', component: MissionsComponent, canActivate: [AuthGuardService]},
-{path: 'products', component: ProductsComponent, canActivate: [AuthGuardService],
-children:[
-  {path: 'all', component: AllProductsComponent},
-]},
-{ path: 'login', component: LoginComponent },
-{ path: 'register', component: RegisterComponent },
-{path: 'admin', component: AdminComponent, canActivate: [AuthGuardService],
-children:[
-  {path: 'create-missions', component: AdminMissionsComponent},
-  {path: 'create-products', component: AdminProductsComponent},
-  {path: 'search-orders', component: AdminOrdersComponent},
-]},
-{path: '**', redirectTo:'home'},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
+  {
+    path: 'missions', component: MissionsComponent, canActivate: [AuthGuardService],
+    children: [
+      { path: 'all', component: AllMissionComponent },
+    ]
+  },
+  {
+    path: 'products', component: ProductsComponent, canActivate: [AuthGuardService],
+    children: [
+      { path: 'all', component: AllProductsComponent },
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  {
+    path: 'basket', component: BasketComponent, canActivate: [AuthGuardService],
+    children: [
+      { path: 'basket-products', component: BasketProductsComponent },
+    ]
+  },
+  { path: 'myorders', component: MyOrdersComponent, canActivate: [AuthGuardService] },
+  {
+    path: 'admin', component: AdminComponent, canActivate: [AuthGuardService],
+    children: [
+      { path: 'create-missions', component: AdminMissionsComponent },
+      { path: 'create-products', component: AdminProductsComponent },
+      { path: 'search-orders', component: AdminOrdersComponent },
+    ]
+  },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

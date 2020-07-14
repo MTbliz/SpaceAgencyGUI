@@ -6,12 +6,11 @@ import { TokenStorageService } from './token-storage.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  
 
-  constructor(private tokenStorageService: TokenStorageService, private authService: AuthService, private router: Router) {}
-  
+  constructor(private tokenStorageService: TokenStorageService, private authService: AuthService, private router: Router) { }
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    
+
     if (this.authService.isLoggedIn) {
       return true;
     } else {

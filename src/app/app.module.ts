@@ -17,6 +17,11 @@ import { AllProductsComponent } from './components/products/all-products/all-pro
 import { LoginComponent } from './security/login/login.component';
 import { RegisterComponent } from './security/register/register.component';
 import { AuthGuardService } from './security/_services/auth-guard-service.service';
+import { BasketComponent } from './components/basket/basket.component';
+import { BasketProductsComponent } from './components/basket/basket-products/basket-products.component';
+import { AllMissionComponent } from './components/missions/all-mission/all-mission.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { MissionDialogUpdateComponent } from './components/admin/admin-missions/mission-dialog-update/mission-dialog-update.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,11 @@ import { AuthGuardService } from './security/_services/auth-guard-service.servic
     AllProductsComponent,
     LoginComponent,
     RegisterComponent,
+    BasketComponent,
+    BasketProductsComponent,
+    AllMissionComponent,
+    MyOrdersComponent,
+    MissionDialogUpdateComponent,
   ],
   imports: [
     BrowserModule,
